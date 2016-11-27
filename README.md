@@ -15,7 +15,7 @@ Settings (login, API-key, ect.) is hardcoded (and of cause removed in these file
 
 ### Mail
 
-´´´php
+```php
 include_once 'CommunicationFactory.php';
 
 $mails = CommunicationFactory::build("mail");
@@ -29,11 +29,11 @@ $files = ["path/to/file.pdf" => "filename.pdf",
 $mails->setAttachement("identifier", $files);
 
 $mails->send(); //Sending all mails 
-´´´
+```
 
 ### SMS
 
-´´´php
+```php
 include_once 'CommunicationFactory.php';
 
 $sms = CommunicationFactory::build("sms");
@@ -42,7 +42,7 @@ $bodyMessage = "Test of sms!";
 $sms->newMessage("identifier", "45xxxxxxxx", $recipients, $bodyMessage);
 
 $sms->send(); //Sending all sms 
-´´´
+```
 
 ## Dependencies
 - guzzle-oauth-subscriber
