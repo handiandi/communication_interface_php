@@ -17,31 +17,48 @@ Settings (login, API-key, ect.) is hardcoded (and of cause removed in these file
 
 ```php
 include_once 'CommunicationFactory.php';
+include_once 'CommunicationException.php';
 
-$mails = CommunicationFactory::build("mail");
-$recipients = [rec1@test2.com, res2@test2.com];
+$recipients = ["rec1@test2.com", "res2@test2.com"];
 $bodyMessage = "Hello you to. <br><br> See U tomorrow";
-$mails->newMessage("identifier", "test@test.com", $recipients, $bodyMessage);
-$mails->setSubject("identifier", "This is a subject");
-
+$mails = CommunicationFactory::build("mail");
 $files = ["path/to/file.pdf" => "filename.pdf",
 		  "path/to/another/file.pdf" => "file.pdf"];
-$mails->setAttachement("identifier", $files);
 
-$mails->send(); //Sending all mails 
+try {
+	$mails->newMessage("identifier", "test@test.com", $recipients, $bodyMessage);
+	$mails->setSubject("identifier", "This is a subject");
+	$mails->setAttachement("identifier", $files);
+} catch(CommunicationException $e){
+	echo "Something went wrong: " . $e->getMessage();	
+}
+
+try {
+	$mails->send(); //Sending all mails 
+} catch(CommunicationException $e){
+	echo "Something went wrong while sending mails: " . $e->getMessage();	
+}
+
 ```
 
 ### SMS
 
 ```php
 include_once 'CommunicationFactory.php';
+include_once 'CommunicationException.php';
 
-$sms = CommunicationFactory::build("sms");
 $recipients = [45xxxxxxxx, 45xxxxxxxx]; //45 is for Denmark
 $bodyMessage = "Test of sms!";
-$sms->newMessage("identifier", "45xxxxxxxx", $recipients, $bodyMessage);
 
-$sms->send(); //Sending all sms 
+$sms = CommunicationFactory::build("sms");
+try{
+	$sms->newMessage("identifier", "45xxxxxxxx", $recipients, $bodyMessage);
+	$sms->send(); //Sending all sms 
+
+} catch (CommunicationException $e){
+	echo "Something went wrong: " . $e->getMessage();	
+}
+
 ```
 
 ## Dependencies
