@@ -1,9 +1,9 @@
-# communication_interface_php
-A comunication interface in PHP, using Factory design pattern
+# PHP - A communication interface to send sms and mails
+A comunication interface in PHP, using Factory design pattern. Can easily be extended to other communication channels, like maybe facebook.
 
 
 ## Notice
-Sorry for the danish in files. 
+Sorry for the danish in files for the documentation. 
 This 'project' is used in a volunteer matter. I have only uploaded it to git to share the basic idea with the design and to share it for in curriculum vitae purposes
 I don't know how often I will be updating the code
 
